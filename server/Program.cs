@@ -1,24 +1,24 @@
-﻿using Calculator;
-using Grpc.Core;
-using System;
+﻿using System;
 using System.IO;
+using Calculator;
+using Grpc.Core;
 
 namespace server
 {
-    class Program
+    internal class Program
     {
-        const int Port = 50052;
+        private const int Port = 50052;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Server server = null;
 
             try
             {
-                server = new Server()
+                server = new Server
                 {
-                    Services = { CalculatorService.BindService(new CalculatorServiceImpl()) },
-                    Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
+                    Services = {CalculatorService.BindService(new CalculatorServiceImpl())},
+                    Ports = {new ServerPort("localhost", Port, ServerCredentials.Insecure)}
                 };
 
                 server.Start();

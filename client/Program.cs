@@ -1,19 +1,19 @@
-﻿using Calculator;
-using Grpc.Core;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Calculator;
+using Grpc.Core;
 
 namespace client
 {
-    class Program
+    internal class Program
     {
-        const string target = "127.0.0.1:50052";
+        private const string target = "127.0.0.1:50052";
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Channel channel = new Channel(target, ChannelCredentials.Insecure);
+            var channel = new Channel(target, ChannelCredentials.Insecure);
 
-            channel.ConnectAsync().ContinueWith((task) =>
+            channel.ConnectAsync().ContinueWith(task =>
             {
                 if (task.Status == TaskStatus.RanToCompletion)
                     Console.WriteLine("The client connected successfully");
@@ -21,7 +21,7 @@ namespace client
 
             var client = new CalculatorService.CalculatorServiceClient(channel);
 
-            var request = new SumRequest()
+            var request = new SumRequest
             {
                 A = 3,
                 B = 10

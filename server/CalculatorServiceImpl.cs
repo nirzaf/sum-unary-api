@@ -11,7 +11,7 @@ namespace server
         {
             int result = request.A + request.B;
 
-            return Task.FromResult(new SumResponse() { Result = result });
+            return Task.FromResult(new SumResponse {Result = result});
         }
     }
 }
